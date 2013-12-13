@@ -3,6 +3,8 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.osmdroid.util.GeoPoint;
+
 public class ApplicationModel {
 	private static ApplicationModel _instance;
 	
@@ -102,6 +104,9 @@ public class ApplicationModel {
 	
 	private void pupulateBuildingList(List<Building> buildingList) {
 		Building building1 = new Building("Edificio1");
+		building1.setContextFeature(
+				new ContextFeature("location",
+						coordinatesToGeoPoint(-34.906909, -57.944568)));
 		Building building2 = new Building("Edificio2");
 		Building building3 = new Building("Edificio3");
 		Building building4 = new Building("Edificio4");
@@ -111,5 +116,16 @@ public class ApplicationModel {
 		buildingList.add(building4);
 		
 		
+	}
+	/**
+	 * Converts a pair of coordinates to a GeoPoint
+	 * 
+	 * @param lat double containing latitude
+	 * @param lng double containing longitude
+	 *            
+	 * @return GeoPoint for the same coords
+	 */
+	public static GeoPoint coordinatesToGeoPoint(double lat, double lgn) {
+	    return new GeoPoint((int) (lat * 1E6), (int) (lgn * 1E6));
 	}
 }

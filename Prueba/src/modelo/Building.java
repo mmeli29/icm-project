@@ -10,7 +10,7 @@ public class Building {
 	
 	public Building(String nameB){
 		this.setNameBuilding(nameB);
-		contextFeature=new ContextFeature("position", null);
+		setContextFeature(new ContextFeature("position", null));
 		
 	}
 	public List<Classroom> getClassroom() {
@@ -19,6 +19,10 @@ public class Building {
 
 	public void setClassroom(List<Classroom> classroom) {
 		this.classroom = classroom;
+	}
+	
+	public String toString(){
+		return getNameBuilding();
 	}
 
 	
@@ -30,6 +34,12 @@ public class Building {
 	public void setNameBuilding(String nameBuilding) {
 		this.nameBuilding = nameBuilding;
 		
+	}
+	public ContextFeature getContextFeature() {
+		return contextFeature;
+	}
+	public void setContextFeature(ContextFeature contextFeature) {
+		this.contextFeature = contextFeature;
 	}
 	
 }

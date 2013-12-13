@@ -4,6 +4,11 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
@@ -21,6 +26,34 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.prueba.DisplayInscripcionesActivity"
+            android:label="@string/title_activity_display_inscripciones"
+            android:parentActivityName="com.example.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.prueba.DisplayEdificiosActivity"
+            android:label="@string/title_activity_display_edificios"
+            android:parentActivityName="com.example.prueba.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prueba.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.prueba.MapViewActivity"
+            android:label="@string/title_activity_map_view"
+            android:parentActivityName="com.example.prueba.DisplayEdificiosActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prueba.DisplayEdificiosActivity" />
         </activity>
     </application>
 

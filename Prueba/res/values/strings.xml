@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Prueba</string>
+    <string name="app_name">Guia UNLP</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="ver_inscripciones">Ver Inscripciones</string>
+    <string name="indicaciones">Indicaciones</string>
+    <string name="verMapa">Ver mapa</string>
+    <string name="title_activity_display_inscripciones">DisplayInscripcionesActivity</string>
+    <string name="title_activity_display_edificios">DisplayEdificiosActivity</string>
+    <string name="title_lista_edificios">Lista de edificios</string>
+    <string name="title_activity_map_view">MapViewActivity</string>
 
 </resources>
