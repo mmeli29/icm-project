@@ -10,6 +10,13 @@
     <string name="title_activity_display_inscripciones">DisplayInscripcionesActivity</string>
     <string name="title_activity_display_edificios">DisplayEdificiosActivity</string>
     <string name="title_lista_edificios">Lista de edificios</string>
+    <string name="title_lista_aulas">Lista de aulas</string>
+    <string name="title_lista_materias">Lista de materias</string>
+    <string name="title_datos_materia">Datos de la materia</string>
+    <string name="edificio_materia">Edificio</string>
+    <string name="nombre_materia">Nombre</string>
     <string name="title_activity_map_view">MapViewActivity</string>
+    <string name="ok_button">OK</string>
+    <string name="ver_plano">Ver Plano</string>
 
 </resources>
