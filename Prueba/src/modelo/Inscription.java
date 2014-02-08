@@ -9,11 +9,13 @@ public class Inscription {
 	private String lapseInitial;
 	private String lapseFinal;
 	private List<HourHand> hourHand;
+	private Classroom aula;
 	
-	public Inscription(String nameS, String lapseI, String lapseF){
+	public Inscription(String nameS, String lapseI, String lapseF, Classroom aula){
 		this.setNameSubject(nameS);
 		this.setLapseFinal(lapseF);
 		this.setLapseInitial(lapseI);
+		this.setAula(aula);
 	
 	}
 	public List<HourHand> getHourHand() {
@@ -39,6 +41,16 @@ public class Inscription {
 	}
 	public void setLapseFinal(String lapseFinal) {
 		this.lapseFinal = lapseFinal;
+	}
+	@Override
+	public String toString() {
+		return nameSubject;
+	}
+	public Classroom getAula() {
+		return aula;
+	}
+	public void setAula(Classroom aula) {
+		this.aula = aula;
 	}
 	
 

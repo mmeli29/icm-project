@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
@@ -8,9 +9,17 @@ public class Building {
 	private List<Classroom> classroom; 
 	private ContextFeature contextFeature;
 	
+	public Building(){
+		this(null);
+	}
 	public Building(String nameB){
+		this(nameB,null);
+		
+	}
+	public Building(String nameB, ContextFeature contextFeature){
 		this.setNameBuilding(nameB);
 		setContextFeature(new ContextFeature("position", null));
+		setClassroom(new ArrayList<Classroom>());
 		
 	}
 	public List<Classroom> getClassroom() {

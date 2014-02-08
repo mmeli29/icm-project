@@ -4,9 +4,14 @@ public class Classroom {
 
 	private String nameClassroom;
 	private Building building;
-	public Classroom(String nameClassroom, Building building){
+	private String map;
+	public Classroom(String nameClassroom, Building building, String map){
 		this.setNameClassroom(nameClassroom);
 		this.setBuilding(building);
+		this.setMap(map);
+	}
+	public Classroom(String nameClassroom){
+		this.setNameClassroom(nameClassroom);
 	}
 	public String getNameClassroom() {
 		return nameClassroom;
@@ -20,5 +25,14 @@ public class Classroom {
 	public void setBuilding(Building building) {
 		this.building = building;
 	}
-		
+	@Override
+	public String toString() {
+		return  getNameClassroom();
+	}
+	public String getMap() {
+		return map;
+	}
+	public void setMap(String map) {
+		this.map = map;
+	}
 }
