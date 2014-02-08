@@ -9,8 +9,66 @@
     tools:context=".DisplayInscripcionesActivity" >
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/title_lista_materias" />
+
+    <Spinner
+        android:id="@+id/listaMaterias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_alignParentLeft="true" />
+	    
+	<View
+	    android:id="@+id/separator"
+	    android:layout_width="fill_parent"
+	    android:layout_height="2dp"
+	    android:background="@android:color/darker_gray"
+	    android:layout_below="@+id/listaMaterias" 
+	    android:layout_marginTop="3dp"
+    	android:layout_marginBottom="3dp"/>
+    
+    <TextView
+        android:id="@+id/titleMaterias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/separator"
+        android:layout_marginBottom="30dp"
+        android:text="@string/title_datos_materia" />
+    
+   	<TextView
+   	    android:id="@+id/nombreMateria"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignParentLeft="true"
+   	    android:layout_below="@+id/titleMaterias"
+   	    android:text="@string/nombre_materia" />
+
+    <EditText
+        android:id="@+id/name_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombreMateria"
+        android:ems="10"
+        android:inputType="text" />
+        
+    <TextView
+   	    android:id="@+id/edificio"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignParentLeft="true"
+   	    android:layout_below="@+id/name_subject"
+   	    android:text="@string/edificio_materia" />
+
+    <EditText
+        android:id="@+id/name_edificio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edificio"
+        android:ems="10"
+        android:inputType="text" />
 
 </RelativeLayout>
