@@ -1,21 +1,71 @@
 package com.example.prueba;
 
+import modelo.ApplicationModel;
+import modelo.Building;
+import modelo.Inscription;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 
 public class DisplayInscripcionesActivity extends Activity {
-
+	ApplicationModel model = ApplicationModel.getInstance();
+	final Context context = this;
+	Spinner inscripcionesList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_inscripciones);
+		inscripcionesList = (Spinner) findViewById(R.id.listaMaterias);
+		populateInscripcionesList();
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+	
+	private void populateInscripcionesList() {
+		// Create an ArrayAdapter using the string array and a default spinner layout
+				ArrayAdapter<Inscription> adapter = new ArrayAdapter<Inscription>(this,
+			              android.R.layout.simple_spinner_item,model.getInscriptionList());
+			        
+				// Apply the adapter to the spinner
+				inscripcionesList.setAdapter(adapter);
+				setSelectionChange(inscripcionesList);
+				// Show the Up button in the action bar.
+				setupActionBar();
+		
+	}
+	
+	private void setSelectionChange(Spinner inscripcionesList) {
+		inscripcionesList.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parent, View selectedItemView, int pos, long id) {
+		    	displayInfoMateria( ((Inscription) parent.getItemAtPosition(pos)));
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		       // your code here	
+		    }
+		});
+	}
+
+	protected void displayInfoMateria(Inscription inscription) {
+		EditText fieldNombre = (EditText)findViewById(R.id.name_subject);
+		EditText fieldEdificio = (EditText)findViewById(R.id.name_edificio);
+		fieldNombre.setText(inscription.getNameSubject());
+		fieldEdificio.setText(inscription.getAula().getBuilding().getNameBuilding());
+		
+		
 	}
 
 	/**

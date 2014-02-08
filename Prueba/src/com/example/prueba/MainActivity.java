@@ -1,5 +1,10 @@
 package com.example.prueba;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import modelo.ApplicationModel;
+import modelo.Building;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +17,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ApplicationModel model = ApplicationModel.getInstance();
+        List<Building> list = model.getBuildingList();
     }
 
 

@@ -1,39 +1,157 @@
 package com.example.prueba;
 
+import java.util.List;
 import java.util.Locale;
 
 import modelo.ApplicationModel;
 import modelo.Building;
+import modelo.Classroom;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.view.View.OnClickListener;
 
 public class DisplayEdificiosActivity extends Activity {
 	ApplicationModel model = ApplicationModel.getInstance();
+	final Context context = this;
+	ListView classRoomList;
+	Spinner buildingList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_edificios);
-		Spinner spinner = (Spinner) findViewById(R.id.listaEdificios);
-		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<Building> adapter = new ArrayAdapter<Building>(this,
-	              android.R.layout.simple_spinner_item,model.getBuildingList() );
-	        
-		// Apply the adapter to the spinner
-		spinner.setAdapter(adapter);
-		// Show the Up button in the action bar.
-		setupActionBar();
+		buildingList = (Spinner) findViewById(R.id.listaEdificios);
+		classRoomList = (ListView) findViewById(R.id.classroomList);
+		populateBuildingList();
+		setClassroomClick(classRoomList);
 	}
+
+	
+	
+	private void populateBuildingList() {
+		// Create an ArrayAdapter using the string array and a default spinner layout
+				ArrayAdapter<Building> adapter = new ArrayAdapter<Building>(this,
+			              android.R.layout.simple_spinner_item,model.getBuildingList() );
+			        
+				// Apply the adapter to the spinner
+				buildingList.setAdapter(adapter);
+				setSelectionChange(buildingList);
+				// Show the Up button in the action bar.
+				setupActionBar();
+		
+	}
+
+	private void setSelectionChange(Spinner buildingList) {
+		buildingList.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parent, View selectedItemView, int pos, long id) {
+		    	populateClassroomList( ((Building) parent.getItemAtPosition(pos)).getClassroom());
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		       // your code here	
+		    }
+		});
+	}
+	
+	private void setClassroomClick(ListView classroomList) {
+		final ListView cList = (ListView) findViewById(R.id.classroomList);
+		classroomList.setOnItemClickListener(new OnItemClickListener() {
+		      public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+		    	  Classroom selectedFromList =(Classroom)(cList.getItemAtPosition(myItemInt));
+		          loadImage(selectedFromList.getNameClassroom());
+		        }                 
+		  });
+	}
+	
+	private void populateClassroomList(List<Classroom> clList) {
+		ArrayAdapter<Classroom> adapter = new ArrayAdapter<Classroom>(context,
+				android.R.layout.simple_list_item_1,clList );   
+		// Apply the adapter to the spinner
+		classRoomList.setAdapter(adapter);
+		
+	}
+	
+	public void loadImage(String aula) {
+        AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View layout = inflater.inflate(R.layout.building_image_dialog,
+                (ViewGroup) findViewById(R.id.layout_root));
+        ImageView imageView = (ImageView) layout.findViewById(R.id.fullimage);
+        int imgId = getResources().getIdentifier(aula, "drawable", context.getPackageName());
+        Drawable image  = getResources().getDrawable(imgId);
+        imageView.setImageDrawable(image);
+        imageDialog.setView(layout);
+        imageDialog.setPositiveButton(getResources().getString(R.string.ok_button), new DialogInterface.OnClickListener(){
+
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+
+        });
+
+
+        imageDialog.create();
+        imageDialog.show();     
+    }
+	
+	private void showDialog(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				context);
+ 
+			// set title
+			alertDialogBuilder.setTitle("Hola");
+ 
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Click yes to exit!")
+				.setCancelable(false)
+				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, close
+						// current activity
+					}
+				  })
+				.setNegativeButton("No",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, just close
+						// the dialog box and do nothing
+						dialog.cancel();
+					}
+				});
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
+			}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -88,4 +206,5 @@ public class DisplayEdificiosActivity extends Activity {
 		intent.putExtra("Long", buildingLong);
 		startActivity(intent);
 	}
+
 }
