@@ -1,13 +1,12 @@
 package com.example.prueba;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import modelo.ApplicationModel;
 import modelo.Building;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 

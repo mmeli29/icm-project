@@ -1,12 +1,17 @@
 package modelo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.osmdroid.util.GeoPoint;
 
 public class ApplicationModel {
 	private static ApplicationModel _instance;
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm",Locale.US);
 	
 	//Context Features
 	
@@ -24,19 +29,15 @@ public class ApplicationModel {
 	Classroom classroom2 = new Classroom("aula2",building2,"aula2");
 	Classroom classroom3 = new Classroom("aula3",building2,"aula3");
 	
-	//inscriptions
-	
-	Inscription inscription1 = new Inscription("materia 1","abril","julio",classroom1);
-	Inscription inscription2 = new Inscription("materia 2","abril","julio",classroom2);
-	Inscription inscription3 = new Inscription("materia 3","abril","julio",classroom3);
-	Inscription inscription4 = new Inscription("materia 4","abril","julio",classroom3);
-	
-	
-	
 	private User user;
 	private List<Inscription> inscriptionList;
 	private List<Building> buildingList;
 	private List<Classroom> classRoomList;
+	
+	//app context
+	
+	private Inscription selectedInscription = null;
+	
 	private ApplicationModel(){
 		
 	}
@@ -48,6 +49,7 @@ public class ApplicationModel {
 	        }
 	        return _instance;
 	}
+
 
 	public User getUser() {
 		if (user == null){
@@ -120,6 +122,30 @@ public class ApplicationModel {
 	}
 	
 	private void populateInscriptionList(List<Inscription> list) {
+		
+		//inscriptions
+		
+		Date hora1 = new Date();
+		Date horaf1 = new Date();
+		Date hora2 = new Date();
+		Date horaf2 = new Date();
+		try {
+			hora1 = sdf.parse("2014-03-08 08:30");
+			horaf1 = sdf.parse("2014-03-08 11:30");
+			hora2 = sdf.parse("2014-04-02 09:00");
+			horaf2 = sdf.parse("2014-04-02 12:00");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		String repExpr1 = "FREQ=WEEKLY;COUNT=10;WKST=SU;BYDAY=TU,TH";
+		String repExpr2 = "FREQ=WEEKLY;COUNT=14;WKST=SU;BYDAY=MO,FR";
+		
+		Inscription inscription1 = new Inscription("materia 1",hora1,horaf1,classroom1,repExpr1);
+		Inscription inscription2 = new Inscription("materia 2",hora2,horaf2,classroom2,repExpr2);
+		Inscription inscription3 = new Inscription("materia 3",hora1,horaf1,classroom3,repExpr1);
+		Inscription inscription4 = new Inscription("materia 4",hora2,horaf2,classroom3,repExpr2);
+		
 		list.add(inscription1);
 		list.add(inscription2);
 		list.add(inscription3);
@@ -145,5 +171,13 @@ public class ApplicationModel {
 	 */
 	public static GeoPoint coordinatesToGeoPoint(double lat, double lgn) {
 	    return new GeoPoint((int) (lat * 1E6), (int) (lgn * 1E6));
+	}
+
+	public Inscription getSelectedInscription() {
+		return selectedInscription;
+	}
+
+	public void setSelectedInscription(Inscription selectedInscription) {
+		this.selectedInscription = selectedInscription;
 	}
 }

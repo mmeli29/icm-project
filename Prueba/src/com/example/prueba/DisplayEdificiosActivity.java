@@ -12,8 +12,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -28,11 +26,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.view.View.OnClickListener;
 
 public class DisplayEdificiosActivity extends Activity {
 	ApplicationModel model = ApplicationModel.getInstance();
@@ -120,38 +116,6 @@ public class DisplayEdificiosActivity extends Activity {
         imageDialog.create();
         imageDialog.show();     
     }
-	
-	private void showDialog(){
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-				context);
- 
-			// set title
-			alertDialogBuilder.setTitle("Hola");
- 
-			// set dialog message
-			alertDialogBuilder
-				.setMessage("Click yes to exit!")
-				.setCancelable(false)
-				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,int id) {
-						// if this button is clicked, close
-						// current activity
-					}
-				  })
-				.setNegativeButton("No",new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,int id) {
-						// if this button is clicked, just close
-						// the dialog box and do nothing
-						dialog.cancel();
-					}
-				});
- 
-				// create alert dialog
-				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
-				alertDialog.show();
-			}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
