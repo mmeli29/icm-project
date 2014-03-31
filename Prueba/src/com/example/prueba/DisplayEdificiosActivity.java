@@ -151,23 +151,11 @@ public class DisplayEdificiosActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void openMapaEdificioGoogleMaps(View view){
-		Spinner spinner = (Spinner) findViewById(R.id.listaEdificios);
-		Building selectedBuilding = (Building)spinner.getSelectedItem();
-		double buildingLat = selectedBuilding.getContextFeature().getValue().getLatitudeE6();
-		double buildingLong =selectedBuilding.getContextFeature().getValue().getLongitudeE6();
-		String uri = String.format(Locale.ENGLISH, "geo:%f,%f", buildingLat, buildingLong);
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-		startActivity(intent);
-	}
 	public void openMapaEdificio(View view){
 		Spinner spinner = (Spinner) findViewById(R.id.listaEdificios);
 		Building selectedBuilding = (Building)spinner.getSelectedItem();
-		double buildingLat = selectedBuilding.getContextFeature().getValue().getLatitudeE6();
-		double buildingLong =selectedBuilding.getContextFeature().getValue().getLongitudeE6();
+		model.setSelectedBuilding(selectedBuilding);
 		Intent intent = new Intent(this, MapViewActivity.class);
-		intent.putExtra("Lat", buildingLat);
-		intent.putExtra("Long", buildingLong);
 		startActivity(intent);
 	}
 
