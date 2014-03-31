@@ -18,7 +18,7 @@ public class Building {
 	}
 	public Building(String nameB, ContextFeature contextFeature){
 		this.setNameBuilding(nameB);
-		setContextFeature(new ContextFeature("position", null));
+		setContextFeature(contextFeature);
 		setClassroom(new ArrayList<Classroom>());
 		
 	}

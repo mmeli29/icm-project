@@ -15,7 +15,7 @@ public class ApplicationModel {
 	
 	//Context Features
 	
-	 ContextFeature coord1 = new ContextFeature("location",coordinatesToGeoPoint(-34.906909, -57.944568));
+	 ContextFeature coord1 = new ContextFeature("location",-34.906909, -57.944568);
 	 
 	//buildings
 		
@@ -37,6 +37,8 @@ public class ApplicationModel {
 	//app context
 	
 	private Inscription selectedInscription = null;
+	
+	private Building selectedBuilding = null;
 	
 	private ApplicationModel(){
 		
@@ -161,17 +163,7 @@ public class ApplicationModel {
 		
 		
 	}
-	/**
-	 * Converts a pair of coordinates to a GeoPoint
-	 * 
-	 * @param lat double containing latitude
-	 * @param lng double containing longitude
-	 *            
-	 * @return GeoPoint for the same coords
-	 */
-	public static GeoPoint coordinatesToGeoPoint(double lat, double lgn) {
-	    return new GeoPoint((int) (lat * 1E6), (int) (lgn * 1E6));
-	}
+	
 
 	public Inscription getSelectedInscription() {
 		return selectedInscription;
@@ -179,5 +171,13 @@ public class ApplicationModel {
 
 	public void setSelectedInscription(Inscription selectedInscription) {
 		this.selectedInscription = selectedInscription;
+	}
+
+	public Building getSelectedBuilding() {
+		return selectedBuilding;
+	}
+
+	public void setSelectedBuilding(Building selectedBuilding) {
+		this.selectedBuilding = selectedBuilding;
 	}
 }

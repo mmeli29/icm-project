@@ -14,7 +14,7 @@ public class User {
 	private List<Inscription> inscription;
 
 	public User(){
-		contextFeature=new ContextFeature("position", null);
+		contextFeature=new ContextFeature();
 		
 	}
 
