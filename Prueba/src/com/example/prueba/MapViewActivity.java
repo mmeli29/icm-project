@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Locale;
 
 import modelo.ApplicationModel;
+import modelo.Building;
+import modelo.RouteProvider;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.overlays.FolderOverlay;
@@ -35,18 +37,26 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class MapViewActivity extends Activity implements LocationListener {
+public class MapViewActivity extends Activity{
 	
+	final Context context = this;
 	ApplicationModel model = ApplicationModel.getInstance();
 	DirectedLocationOverlay myLocationOverlay;
 	IMapController mapController;
 	MapView map;
+	Spinner routeProviderSpinner;
 	LocationManager locationManager;
 	protected Polyline roadOverlay;
 	protected FolderOverlay roadNodeMarkers;
+	MyLocationListener locationListener = new MyLocationListener();
 	
 	GeoPoint destinationPoint;
 	GeoPoint startPoint;
@@ -61,8 +71,9 @@ public class MapViewActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_map_view);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
 		this.whichRouteProvider = OSRM;
+		routeProviderSpinner = (Spinner) findViewById(R.id.routeProviderList);
+		populateProviderSpinner();
 		map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPQUESTOSM);
         map.setBuiltInZoomControls(true);
@@ -90,7 +101,8 @@ public class MapViewActivity extends Activity implements LocationListener {
 			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (location != null) {
 			//location known:
-			onLocationChanged(location);
+			locationListener.onLocationChanged(location);
+//			onLocationChanged(location);
 			startPoint = new GeoPoint(location); 
 		} else {
 			//no location known: hide myLocationOverlay
@@ -118,24 +130,24 @@ public class MapViewActivity extends Activity implements LocationListener {
 	protected void onPause(){
 		super.onPause();
 		myLocationOverlay.setEnabled(Boolean.FALSE);
-		locationManager.removeUpdates(this);
+		locationManager.removeUpdates(locationListener);
 	}
-	@Override
-	public void onLocationChanged(Location location){
-		GeoPoint newLocation = new GeoPoint(location);
-		startPoint = newLocation;
-		mapController.animateTo(newLocation);
-		myLocationOverlay.setLocation(newLocation);
-		myLocationOverlay.setAccuracy((int)location.getAccuracy());
-		getRoadAsync();
-		map.invalidate();
-		
-	}
+//	@Override
+//	public void onLocationChanged(Location location){
+//		GeoPoint newLocation = new GeoPoint(location);
+//		startPoint = newLocation;
+//		mapController.animateTo(newLocation);
+//		myLocationOverlay.setLocation(newLocation);
+//		myLocationOverlay.setAccuracy((int)location.getAccuracy());
+//		getRoadAsync();
+//		map.invalidate();
+//		
+//	}
 
 	boolean startLocationUpdates(){
 		boolean result = false;
 		for (final String provider : locationManager.getProviders(true)) {
-			locationManager.requestLocationUpdates(provider, 2*1000, 0.0f, this);
+			locationManager.requestLocationUpdates(provider, 0, 0, locationListener);
 			result = true;
 		}
 		return result;
@@ -237,24 +249,6 @@ public class MapViewActivity extends Activity implements LocationListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	@Override
-	public void onProviderDisabled(String arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onProviderEnabled(String arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	private class UpdateRoadTask extends AsyncTask<Object, Void, Road> {
 		protected Road doInBackground(Object... params) {
@@ -267,16 +261,16 @@ public class MapViewActivity extends Activity implements LocationListener {
 				roadManager = new OSRMRoadManager();
 				break;
 			case MAPQUEST_FASTEST:
-				roadManager = new MapQuestRoadManager("Fmjtd%7Cluubn10zn9%2C8s%3Do5-90rnq6");
+				roadManager = new MapQuestRoadManager("Fmjtd%7Cluur2qubnq%2Cb0%3Do5-9aand0");
 				roadManager.addRequestOption("locale="+locale.getLanguage()+"_"+locale.getCountry());
 				break;
 			case MAPQUEST_BICYCLE:
-				roadManager = new MapQuestRoadManager("Fmjtd%7Cluubn10zn9%2C8s%3Do5-90rnq6");
+				roadManager = new MapQuestRoadManager("Fmjtd%7Cluur2qubnq%2Cb0%3Do5-9aand0");
 				roadManager.addRequestOption("locale="+locale.getLanguage()+"_"+locale.getCountry());
 				roadManager.addRequestOption("routeType=bicycle");
 				break;
 			case MAPQUEST_PEDESTRIAN:
-				roadManager = new MapQuestRoadManager("Fmjtd%7Cluubn10zn9%2C8s%3Do5-90rnq6");
+				roadManager = new MapQuestRoadManager("Fmjtd%7Cluur2qubnq%2Cb0%3Do5-9aand0");
 				roadManager.addRequestOption("locale="+locale.getLanguage()+"_"+locale.getCountry());
 				roadManager.addRequestOption("routeType=pedestrian");
 				break;
@@ -294,5 +288,67 @@ public class MapViewActivity extends Activity implements LocationListener {
 			mRoad = result;
 			updateUIWithRoad(result);
 		}
+		
+		
 	}
+	
+	private void populateProviderSpinner() {
+		// Create an ArrayAdapter using the string array and a default spinner layout
+				ArrayAdapter<RouteProvider> adapter = new ArrayAdapter<RouteProvider>(context,
+			              android.R.layout.simple_spinner_item,model.getRouteProviderList() );
+			        
+				// Apply the adapter to the spinner
+				routeProviderSpinner.setAdapter(adapter);
+				sertRouteProviderSelectionChange(routeProviderSpinner);
+				// Show the Up button in the action bar.
+				setupActionBar();
+		
+	}
+
+	private void sertRouteProviderSelectionChange(
+			Spinner routeProviderSpinner) {
+		routeProviderSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parent, View selectedItemView, int pos, long id) {
+		    	whichRouteProvider = ((RouteProvider)parent.getItemAtPosition(pos)).getProviderValue();
+		    	getRoadAsync();
+		    	map.invalidate();
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		       // your code here	
+		    }
+		});
+		
+	}
+	
+	private final class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+        	GeoPoint newLocation = new GeoPoint(location);
+    		startPoint = newLocation;
+    		mapController.animateTo(newLocation);
+    		myLocationOverlay.setLocation(newLocation);
+    		myLocationOverlay.setAccuracy((int)location.getAccuracy());
+    		getRoadAsync();
+    		map.invalidate();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+        	String prov = provider;
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+        	String prov = provider;
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+           int stat = status;
+        }
+}
 }
