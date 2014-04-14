@@ -82,6 +82,7 @@ public class MapViewActivity extends Activity{
         destinationPoint = model.getSelectedBuilding().getContextFeature().getValue();
         Marker startMarker = new Marker(map);
         startMarker.setPosition(destinationPoint);
+        startMarker.setTitle(model.getSelectedBuilding().getNameBuilding());
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         map.getOverlays().add(startMarker);
        
