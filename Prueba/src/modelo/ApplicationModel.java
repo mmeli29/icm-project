@@ -33,6 +33,7 @@ public class ApplicationModel {
 	private List<Inscription> inscriptionList;
 	private List<Building> buildingList;
 	private List<Classroom> classRoomList;
+	private List<RouteProvider> routeProviderList;
 	
 	//app context
 	
@@ -180,4 +181,26 @@ public class ApplicationModel {
 	public void setSelectedBuilding(Building selectedBuilding) {
 		this.selectedBuilding = selectedBuilding;
 	}
+
+	public List<RouteProvider> getRouteProviderList() {
+		if (routeProviderList == null){
+			routeProviderList = new ArrayList<RouteProvider>();
+			populateRouteProviderList(routeProviderList);
+		}
+		return routeProviderList;
+	}
+
+	private void populateRouteProviderList(
+			List<RouteProvider> routeProviderList) {
+		routeProviderList.add(new RouteProvider("OSRM", 0));
+		routeProviderList.add(new RouteProvider("MAPQUEST_FASTEST", 1));
+		routeProviderList.add(new RouteProvider("MAPQUEST_BICYCLE", 2));
+		routeProviderList.add(new RouteProvider("MAPQUEST_PEDESTRIAN", 3));
+		routeProviderList.add(new RouteProvider("GOOGLE_FASTEST", 4));
+		}
+
+	public void setRouteProviderList(List<RouteProvider> routeProviderList) {
+		this.routeProviderList = routeProviderList;
+	}
+	
 }
