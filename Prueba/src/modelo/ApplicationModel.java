@@ -28,8 +28,8 @@ public class ApplicationModel {
 	Building building2 = new Building("Facultad de Ingenieria",coord2);
 	Building building3 = new Building("Facultad de Ciencias Exactas",coord3);
 	Building building4 = new Building("Departamento de Aeronautica",coord4);
-	Building building5 = new Building("Departamento de Electrotecnía",coord5);	
-	Building building6 = new Building("Departamento de Hidraúlica",coord6);	
+	Building building5 = new Building("Departamento de Electrotecnia",coord5);	
+	Building building6 = new Building("Departamento de Hidráulica",coord6);	
 	
 	//Classrooms
 	Classroom classroom1 = new Classroom("aula1",building1,"aula1");
