@@ -19,13 +19,17 @@ public class ApplicationModel {
 	 ContextFeature coord2 = new ContextFeature("location",-34.907596, -57.944964);
 	 ContextFeature coord3 = new ContextFeature("location",-34.9070677, -57.9442227);
 	 ContextFeature coord4 = new ContextFeature("location",-34.906007, -57.94378800000001);
-		
+	 ContextFeature coord5 = new ContextFeature("location", -34.906731, -57.942696);
+	 ContextFeature coord6 = new ContextFeature("location", -34.906124, -57.943002);
+				
 	 //buildings
 		
-	Building building1 = new Building("Edificio1",coord1);
+	Building building1 = new Building("Departamento de Agrimensura",coord1);
 	Building building2 = new Building("Facultad de Ingenieria",coord2);
 	Building building3 = new Building("Facultad de Ciencias Exactas",coord3);
 	Building building4 = new Building("Departamento de Aeronautica",coord4);
+	Building building5 = new Building("Departamento de Electrotecnía",coord5);	
+	Building building6 = new Building("Departamento de Hidraúlica",coord6);	
 	
 	//Classrooms
 	Classroom classroom1 = new Classroom("aula1",building1,"aula1");
@@ -99,6 +103,7 @@ public class ApplicationModel {
 		building1.getClassroom().add(classroom1);
 		building1.getClassroom().add(classroom2);
 		building1.getClassroom().add(classroom3);	
+		building2.getClassroom().add(classroom2);
 	}
 
 	public void setBuildingList(List<Building> buildingList) {
@@ -164,6 +169,9 @@ public class ApplicationModel {
 		buildingList.add(building2);
 		buildingList.add(building3);
 		buildingList.add(building4);
+		buildingList.add(building5);
+		buildingList.add(building6);
+		
 		
 		
 	}
