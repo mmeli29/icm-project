@@ -16,13 +16,16 @@ public class ApplicationModel {
 	//Context Features
 	
 	 ContextFeature coord1 = new ContextFeature("location",-34.906909, -57.944568);
-	 
-	//buildings
+	 ContextFeature coord2 = new ContextFeature("location",-34.907596, -57.944964);
+	 ContextFeature coord3 = new ContextFeature("location",-34.9070677, -57.9442227);
+	 ContextFeature coord4 = new ContextFeature("location",-34.906007, -57.94378800000001);
+		
+	 //buildings
 		
 	Building building1 = new Building("Edificio1",coord1);
-	Building building2 = new Building("Edificio2",coord1);
-	Building building3 = new Building("Edificio3",coord1);
-	Building building4 = new Building("Edificio4",coord1);
+	Building building2 = new Building("Facultad de Ingenieria",coord2);
+	Building building3 = new Building("Facultad de Ciencias Exactas",coord3);
+	Building building4 = new Building("Departamento de Aeronautica",coord4);
 	
 	//Classrooms
 	Classroom classroom1 = new Classroom("aula1",building1,"aula1");

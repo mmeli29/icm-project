@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.x">
+    <Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9505,-34.9095, 0.000000</coordinates></Point>
+    </Placemark>
+	<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9491,-34.9069, 0.000000</coordinates></Point>
+    </Placemark>
+	<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9487,-34.9071, 0.000000</coordinates></Point>
+    </Placemark>
+	<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9483,-34.9074, 0.000000</coordinates></Point>
+    </Placemark>
+	<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9481,-34.9077, 0.000000</coordinates></Point>
+    </Placemark>
+	<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9475,-34.9079, 0.000000</coordinates></Point>
+    </Placemark>
+    <Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9471,-34.9082, 0.000000</coordinates></Point>
+    </Placemark>
+    <Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9466,-34.9080, 0.000000</coordinates></Point>
+    </Placemark>
+    <Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9461,-34.9075, 0.000000</coordinates></Point>
+    </Placemark>
+    <Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9456,-34.9070, 0.000000</coordinates></Point>
+    </Placemark>
+    <Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9449,-34.9065, 0.000000</coordinates></Point>
+    </Placemark>
+		<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9445,-34.9064, 0.000000</coordinates></Point>
+    </Placemark>
+		<Placemark>
+        <name></name>
+        <description></description>
+        <Point><coordinates>-57.9443,-34.9065, 0.000000</coordinates></Point>
+    </Placemark>
+ </kml>
